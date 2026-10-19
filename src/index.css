@@ -1,0 +1,202 @@
+/* ============================================================
+   Portfolio LHO — src/index.css · La Huella del Oso (Tailwind CSS v4)
+   Narrativas Inter-Especie · Diseño Centrado en la Vida
+   Fuentes a cargar en index.html desde Google Fonts:
+     <link href="https://fonts.googleapis.com/css2?family=Carter+One&family=Mulish:ital,wght@0,200..1000;1,200..1000&family=Questrial&display=swap" rel="stylesheet">
+   ============================================================ */
+
+@import "tailwindcss";
+
+/* Activación de modo oscuro mediante clase HTML (.dark) o preferencia del sistema */
+@custom-variant dark (&:where(.dark, .dark *, [data-theme="dark"], [data-theme="dark"] *));
+
+@theme {
+  /* ---------- Reset de la paleta por defecto para control absoluto ---------- */
+  --color-*: initial;
+
+  /* ---------- Colores de Marca (Identidad de La Huella del Oso) ---------- */
+  --color-oso-morado: #311847;
+  /* Tinta principal, forma del oso y texto destacado */
+  --color-oso-teal: #339183;
+  /* Acento, reflejos, hocico y elementos interactivos */
+
+  /* Generación dinámica de escalas usando OKLCH relativo en CSS puro */
+  /* Escala de Morado */
+  --color-morado-50: oklch(from var(--color-oso-morado) 0.96 0.02 h);
+  --color-morado-200: oklch(from var(--color-oso-morado) 0.85 0.05 h);
+  --color-morado-500: var(--color-oso-morado);
+  --color-morado-700: oklch(from var(--color-oso-morado) 0.20 0.08 h);
+  --color-morado-900: oklch(from var(--color-oso-morado) 0.12 0.06 h);
+
+  /* Escala de Teal / Bosque */
+  --color-teal-50: oklch(from var(--color-oso-teal) 0.96 0.03 h);
+  --color-teal-200: oklch(from var(--color-oso-teal) 0.88 0.06 h);
+  --color-teal-500: var(--color-oso-teal);
+  --color-teal-700: oklch(from var(--color-oso-teal) 0.40 0.09 h);
+  --color-teal-900: oklch(from var(--color-oso-teal) 0.25 0.07 h);
+
+  /* ---------- Superficies Orgánicas (Fondo Crema y Topografía) ---------- */
+  --color-crema-base: #f6f5ef;
+  /* Fondo principal extraído de la gráfica */
+  --color-crema-superficie: #ffffff;
+  /* Tarjetas o capas elevadas */
+  --color-crema-oscuro: #e8e5da;
+  /* Estados hover en fondos claros */
+  --color-topo-lineas: #c4d4cc;
+  /* Color de las líneas topográficas del fondo */
+
+  /* ---------- Roles Semánticos (Tema Claro por Defecto) ---------- */
+  --color-bg: var(--color-crema-base);
+  --color-surface: var(--color-crema-superficie);
+  --color-surface-hover: var(--color-crema-oscuro);
+  --color-line: var(--color-topo-lineas);
+
+  --color-ink: var(--color-morado-500);
+  /* Texto principal alto contraste */
+  --color-ink-soft: oklch(from var(--color-oso-morado) 0.45 0.04 h);
+  /* Texto secundario */
+  --color-ink-muted: oklch(from var(--color-oso-morado) 0.65 0.02 h);
+  /* Texto deshabilitado/meta */
+
+  --color-accent: var(--color-teal-500);
+  /* Botones, enlaces, llamadas a la acción */
+  --color-accent-hover: var(--color-teal-700);
+
+  /* ---------- Signos de la ontología (data/ontology.js → SIGNS) ---------- */
+  --color-cian: #00f2fe;
+  /* Índice: rastro sonoro o visual, significa por contacto */
+  --color-violeta: #7c4dff;
+  /* Ícono: semejanza, resonancia entre especies */
+  --color-carmesi: #d81b60;
+  /* Símbolo: palabra, mito, memoria */
+
+  --color-transparent: transparent;
+  --color-current: currentColor;
+
+  /* ---------- Tipografía Estratégica ---------- */
+  /* 1. Titulares y Logo: Carter One (Fuerte personalidad, trazo orgánico) */
+  --font-display: "Carter One", system-ui, cursive;
+  /* 2. Subtítulos y UI geométrica: Questrial (Limpia, moderna, equilibra la decoración del título) */
+  --font-sans: "Questrial", system-ui, sans-serif;
+  /* 3. Párrafos largos y lectura extensa: Mulish (Excelente legibilidad y neutralidad) */
+  --font-text: "Mulish", system-ui, sans-serif;
+
+  /* Escala fluida matemática (clamp) para evitar media queries constantes */
+  --text-xs: clamp(0.75rem, 0.72rem + 0.1vw, 0.8rem);
+  --text-sm: clamp(0.875rem, 0.84rem + 0.15vw, 0.95rem);
+  --text-base: clamp(1rem, 0.96rem + 0.2vw, 1.125rem);
+  --text-lg: clamp(1.2rem, 1.1rem + 0.4vw, 1.4rem);
+  --text-xl: clamp(1.5rem, 1.3rem + 0.8vw, 1.9rem);
+  --text-2xl: clamp(1.9rem, 1.5rem + 1.6vw, 2.8rem);
+  --text-3xl: clamp(2.4rem, 1.8rem + 2.8vw, 4.2rem);
+  --text-4xl: clamp(3rem, 2rem + 5vw, 6.5rem);
+
+  --tracking-display: 0.02em;
+  --leading-text: 1.7;
+
+  /* ---------- Formas y Sombras ---------- */
+  --radius-hoja: 0.75rem;
+  --radius-piedra: 1.5rem;
+  --radius-organico: 42% 58% 63% 37% / 41% 44% 56% 59%;
+
+  --shadow-suave: 0 10px 30px -10px rgb(49 24 71 / 0.08);
+  /* Sombra basada en el morado */
+  --shadow-fuerte: 0 20px 40px -15px rgb(49 24 71 / 0.15);
+
+  /* ---------- Ritmo de Animación ---------- */
+  --ease-fluido: cubic-bezier(0.22, 1, 0.36, 1);
+  --duration-hover: 0.3s;
+}
+
+/* ---------- Configuración Base y Tema Oscuro ---------- */
+@layer base {
+  html {
+    background-color: var(--color-bg);
+    color: var(--color-ink);
+    font-family: var(--font-text);
+    /* Mulish como base de lectura */
+    line-height: var(--leading-text);
+    color-scheme: light;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* Inversión semántica para el Modo Oscuro (clase .dark o atributo data-theme="dark") */
+  .dark,
+  [data-theme="dark"] {
+    --color-bg: var(--color-morado-900);
+    --color-surface: var(--color-morado-700);
+    --color-surface-hover: var(--color-oso-morado);
+    --color-line: oklch(from var(--color-oso-morado) 0.35 0.06 h);
+
+    --color-ink: var(--color-crema-base);
+    --color-ink-soft: var(--color-teal-200);
+    --color-ink-muted: oklch(from var(--color-crema-base) 0.6 0.01 h);
+
+    --color-accent: var(--color-teal-500);
+    color-scheme: dark;
+  }
+
+  /* Asignación estricta de fuentes a etiquetas HTML */
+  h1,
+  h2,
+  h3,
+  .font-display {
+    font-family: var(--font-display);
+    letter-spacing: var(--tracking-display);
+    line-height: 1.1;
+    font-weight: 400;
+    /* Carter One suele rendir mejor en 400 */
+  }
+
+  h4,
+  h5,
+  h6,
+  .font-sans {
+    font-family: var(--font-sans);
+    font-weight: 400;
+  }
+
+  p,
+  span,
+  div,
+  .font-text {
+    font-family: var(--font-text);
+  }
+
+  ::selection {
+    background-color: var(--color-oso-teal);
+    color: var(--color-crema-superficie);
+  }
+}
+
+/* ---------- Utilidades Personalizadas (Tailwind v4) ---------- */
+/* Estas clases pueden aplicarse directamente en el HTML (ej: class="card-glass") */
+
+@utility card-glass {
+  background-color: color-mix(in oklab, var(--color-surface) 85%, transparent);
+  border: 1px solid color-mix(in oklab, var(--color-line) 40%, transparent);
+  backdrop-filter: blur(12px);
+  border-radius: var(--radius-piedra);
+  box-shadow: var(--shadow-suave);
+  transition: all var(--duration-hover) var(--ease-fluido);
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-fuerte);
+    border-color: color-mix(in oklab, var(--color-accent) 40%, transparent);
+  }
+}
+
+@utility shape-blob {
+  border-radius: var(--radius-organico);
+}
+
+/* Simulación procedural del fondo topográfico de la imagen */
+@utility bg-topography {
+  background-image: repeating-radial-gradient(circle at 50% 50%,
+      transparent 0,
+      transparent 40px,
+      color-mix(in oklab, var(--color-line) 30%, transparent) 40px,
+      color-mix(in oklab, var(--color-line) 30%, transparent) 42px);
+  background-size: 100% 100%;
+}
